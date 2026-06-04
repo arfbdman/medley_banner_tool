@@ -1,12 +1,11 @@
+<!DOCTYPE html>
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <title>バナープロンプトメーカー — Medley PMAX</title>
 <style>
-  /* fonts via link tag */
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap');
   :root{--teal:#41C2BE;--teal-dark:#2BA8A4;--pink:#FF4F7E;--navy:#0E1E3D;--navy2:#162845;--surface:#F4F7FB;--card:#FFFFFF;--border:#E2E8F0;--text:#1A2340;--muted:#6B7A99;--tag:#EBF8F8}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Noto Sans JP',sans-serif;background:var(--surface);color:var(--text);min-height:100vh}
@@ -231,8 +230,7 @@
 </div>
 
 <script>
-
-const DRIVE_IDS={"p-max_薬剤師_202603_app_st_1200x1200_年間休日120日以上残業ほぼなし_0310.jpg":"1Qz-nzAzj2JWuZsKLTh_gaEaxWlnSLW0p","p-max_薬剤師_202603_app_st_1200x1200_年収700万円以上可能_0310.jpg":"1-wkvxIssea6Eav6SQeqvMoW5z3qgd8GA","p-max_汎用_202603_reg_st_1200x1200_スカウト経由の応募_0323修正.jpg":"19WLcZ-PjH2gmv7jSx8fHBcYhsNSbBsvp","p-max_汎用_202603_reg_st_1200x1200_看護・介護・保育求人数No1_0310.jpg":"1ehPKmXQZcHa5Ve-WpoFumBF8303aik09","p-max_保育士_202604_reg_st_1200x1200_オープン3年以内_0414_.jpg":"18NlWLkv6LQl-Xou63C2IoXZTMQ6Bjedg","p-max_汎用_202603_reg_st_1200x1200_求人数NO1_0310.jpg":"1NNxTmmW2F1UgtI0NqEoC_iyAg2li6f0L","p-max_薬剤師_202604_app_st_1200x1200_月給60万円以上可_0414_.jpg":"1hxNfyutdf5KiE0U31CwilVg7Ls_XffaX","p-max_汎用_202603_reg_st_1200x1200_応募前チェック_0323修正.jpg":"1JqwINL8Evscc_fqOlkuNEZ47ZQam-R7Z","p-max_汎用_202603_app_st_1200x1200_豊富な求人_0310.jpg":"17-i8qnsmH9FRwgwsM7yRygUtMZn8lv75","p-max_汎用_202603_app_st_1200x1200_事業所とやりとり_0310.jpg":"1FCqH7eVi1UUcR6KAlL3o0_nWc_maSUFH","p-max_保育士_202604_app_st_1200x1200_総求人数_0414_.jpg":"1GpoK7O-GaOx5m07l0-s0m2KrxWtQYU6U","p-max_保育士_202605_reg_st_1200x1200_ボーナス・賞与あり_0526修正.jpg":"1PWpWxt3QRXidfnSsNyzG92_fiHGNTBes","p-max_汎用_202604_reg_st_1200x1200_希望の条件_0414.jpg":"1JRgNZexDLPN3fqpnud4mQwrpUqcZMogI","p-max_年収診断_202604_reg_st_1200x1200_想定年収_0414_.jpg":"1lp1fH_nwBuUmafIiX-QgHytfTDevMQqw","p-max_汎用_202605_reg_st_1200x1200_スキマ時間BU_0526修正.jpg":"1LD0u3IymIA7AKNxO8gsI-qQArsvVoTD6","p-max_年収診断_202604_reg_st_1200x1200_7つの質問_0414_.jpg":"1s6HtclEepamQj0_sJs6wjmIiIPfX9yzf","p-max_児童指導員_202604_reg_st_1200x1200_資格を活かした転職_0414_.jpg":"1CU1mRLVV2l4zramlYHIJkjCGLA22SkeJ","p-max_年収診断_202605_reg_st_1200x1200_スマホで手軽に想定年収診断__0515.jpg":"13kKWgj21QQq10X2y16YYllnlKykYwCtl","p-max_年収診断_202605_reg_st_1200x1200_想定年収診断します_0515.jpg":"1oREI5ZkgiLjCthwhNnR45u9FGJMRk2Y1","p-max_児童指導員_202604_app_st_1200x1200_未経験可_0414_.jpg":"1nbOZ5y9CqfyJSYxaqXuIgLRqcfpQt9Bj","p-max_理学療法士_202512_reg_st_12001200_小児リハビリ・脳血管リハビリ_1217.jpg":"1zcYQSnqaHWtXeXVV-kAJxiLWP7k-o213","p-max_汎用_202512_reg_st_12001200_登録者数272万人_1217.jpg":"1e0ZGdNPNjjpdGO9mey9udYb2d8wc3uwC","p-max_歯科医師_202604_reg_st_1200x1200_転職ペース×登録促進_0414_.jpg":"1YoIhuduQJBYp2ifid39hFWkdv_zkWhFi","p-max_歯科医師_202604_reg_st_1200x1200_資格取得支援_0414_.jpg":"1ZqLlFP_wGq-M1Ww-h0dIBalt34Nm4jB2","p-max_理学療法士_202602_reg_st_12001200_月給50万円以上可能_0210.jpg":"1yxtU3Bu0qldCsqP1aCi1xn--X0Nq-tZo","p-max_薬剤師_202602_app_st_12001200_年収700万円以上可能_0210.jpg":"1Ck7kuKu9c6Jez2C_l963HlYJvhOYncF0","p-max_年収診断_202512_reg_st_12001200_キャリアの転機_1217.jpg":"1Jv03AIMm73r8XIvffrOgnZkRA1gxiZCN","p-max_汎用_202512_reg_st_12001200_スキマ時間_1217.jpg":"1lb8ESxWaEBnUcH_pJ4_L2SDxb5rPvj19","p-max_看護師_202604_reg_st_1200x1200_年収600万円以上可_0414_.jpg":"1o-TZzcgELf9LaE5GKqEeDAjGt9EnIw7w","p-max_看護師_202604_reg_st_1200x1200_選ばれる側BU_0414_.jpg":"1zgPtwZWKJUiL_JT7C_G9cx7J7nubFpF5","p-max_汎用_202512_app_st_12001200_ぴったりの求人_1217.jpg":"1MpOTbD-Wk_38Pd5Egszs_qFh-4q8IPlY","p-max_汎用_202601_reg_st_12001200_隙間時間_0209修正.jpg":"1nKEYd-FLholDDLR1x19WcEiCt4bgS128","p-max_歯科医師_202605_reg_st_1200x1200_長期休暇あり_0515.jpg":"1cnt8UGovOtNGUTuJSkkEWeIGBqkhxELz","p-max_汎用_202601_reg_st_12001200_全国50万件以上_0209修正.jpg":"1kp5gpjY9sqKAqnhOARd7H_gmZYjRd6Q1","p-max_看護師_202604_reg_st_1200x1200_あなたを求める職場_0414_.jpg":"1fOfbUxG-1tlDbC8Ppcz6ZVh3h_FASxrP","p-max_看護師_202605_reg_st_1200x1200_復職BBU_0515.jpg":"1u0o44036pWfFxNN717GU-vLd1cXydysu","p-max_汎用_202512_app_st_12001200_自宅から近い_1217.jpg":"18idhESbG96dK41o28IAAJtEnG49YGJ54","p-max_薬剤師_202602_app_st_12001200_オープン3年以内_0210.jpg":"1klxIbaqGF0MD0ctyKM0KMPxvptIroITF","p-max_生活支援員_202512_app_st_12001200_月給35万円以上可_1217.jpg":"1--IrFcnf5vszGBgKgUWfTFvWcDovNwSO","p-max_汎用_202602_reg_st_12001200_プロフィール登録_0210.jpg":"1iff3yc6Gu_MkVUFubEN8T-UFaWZjndlx","p-max_汎用_202512_reg_st_12001200_マイペース転職_1217.jpg":"15B5IQqrLlUaQwWdm6wu1hHbbDMr0ptE0","p-max_看護師_202604_reg_st_1200x1200_好条件×スカウト_0414.jpg":"169LwNUdxdhZK9O5I333ZHBgTnYv-HWAD","p-max_汎用_202601_app_st_12001200_正職員求人_0209.jpg":"1h2JwXIXg_ymg5C0-4bqoS56434_svOgf","p-max_汎用_202601_reg_st_12001200_1分で確認_0209.jpg":"19jMwDec_gVONWl3cf28COQB11RFjTI52","p-max_汎用_202512_app_st_12001200_スカウト経由の応募内定率_1217.jpg":"1NcJLj4DcwF6YzlbHbHN-FJisP5E0qA6v","p-max_汎用_202602_app_st_12001200_急募A_0210.jpg":"1W2npBpBxc1cdDB09l64LvzmOaXawAnsz","p-max_汎用_202601_app_st_12001200_入職希望の方向け_0209.jpg":"1pbX-BPI4SZEhjlwJ9Tlorvlevu0wOBP1","p-max_看護師_202605_reg_st_1200x1200_好条件×スカウト_0515.jpg":"1Z9Ih7d3kKc4IiXmpqUU1ESnTwA_-do7g"};
+const DRIVE_IDS={"p-max_ケアマネジャー_202512_reg_st_12001200_有資格_1217.jpg":"1KC7wmA6ZnYa6DhAS4hnJL82QoOGmlu-o","p-max_ケアマネジャー_202512_reg_st_12001200_比較検討_1217.jpg":"16lgMEwhOXW7vIV__ncKPa1rVpJAYzSEV","p-max_介護職_202512_app_st_12001200_月給35万円以上可_1217.jpg":"1R1cJsp_CQZR1fG2kLvzsJEdW96WECue4","p-max_介護職_202512_app_st_12001200_有資格_1217.jpg":"1xKx_EwJLDTj5h9YrY2OuN3dyKSSsry_B","p-max_保育士_202604_app_st_1200x1200_総求人数_0414_.jpg":"1GpoK7O-GaOx5m07l0-s0m2KrxWtQYU6U","p-max_保育士_202604_reg_st_1200x1200_オープン3年以内_0414_.jpg":"18NlWLkv6LQl-Xou63C2IoXZTMQ6Bjedg","p-max_保育士_202605_reg_st_1200x1200_ボーナス・賞与あり_0526修正.jpg":"1PWpWxt3QRXidfnSsNyzG92_fiHGNTBes","p-max_児童指導員_202512_app_st_12001200_放課後等デイサービス_1217.jpg":"1NcGlU6pn9jbyQXicRtUf2bAGaALwYsWT","p-max_児童指導員_202512_app_st_12001200_条件訴求_1217.jpg":"1R8HgDOyoFf-xTeKAHmesqCWszsIkVLud","p-max_児童指導員_202512_reg_st_12001200_急募×有資格_1217.jpg":"1ixQye91r6Q99UWldKWxoYujncjfXfTr1","p-max_児童指導員_202512_reg_st_12001200_福祉・保育_1217.jpg":"17RCKXBI27l-VjTxvWLQsP6iRzrh0v12h","p-max_児童指導員_202604_app_st_1200x1200_未経験可_0414_.jpg":"1nbOZ5y9CqfyJSYxaqXuIgLRqcfpQt9Bj","p-max_児童指導員_202604_reg_st_1200x1200_資格を活かした転職_0414_.jpg":"1CU1mRLVV2l4zramlYHIJkjCGLA22SkeJ","p-max_医師_202512_reg_st_12001200_年収1400万円以上可_1217.jpg":"11brVg611j7zmQ8aStCbAt4Hdvxa52U_x","p-max_医師_202512_reg_st_12001200_求人検索_1217.jpg":"1IdShAtscYCn2rMlxarZVyoWLKIgnRxB9","p-max_医師_202602_app_st_12001200_年収1400万円以上可能_0210.jpg":"1Ep7TfYGT_gl9foJWh_3xX_lZH988AGuL","p-max_医師_202603_app_st_12001200_オンコールなし免除可_0310.jpg":"1lzaJ9EtoUQwqe2r20NIg2Z2LJf5ZrOMO","p-max_年収診断_202512_reg_st_12001200_キャリアの転機_1217.jpg":"1Jv03AIMm73r8XIvffrOgnZkRA1gxiZCN","p-max_年収診断_202512_reg_st_12001200_キャリアアップ_1217.jpg":"1TqShFOEbdoMhHjYIwkMhCkvOqF-F_yra","p-max_年収診断_202601_reg_st_12001200_スマホで手軽に_0209.jpg":"1jZ-V-Oeb5yeI1LG1h5q2Z0ojiBFkp_90","p-max_年収診断_202601_reg_st_12001200_医療介護業界での転職_0209修正.jpg":"1DTzvm5E0JZ-y1oLL-rdGI7wnlt0LeW-D","p-max_年収診断_202602_reg_st_12001200_医療介護業界_0210.jpg":"1OJKWXRzMbgdtBRWwAt0_DyFU45J9oydG","p-max_年収診断_202602_reg_st_12001200_簡単60秒_0210.jpg":"1WcLXzQwP4IjM9SI_0x75kaEmU9LeoH_N","p-max_年収診断_202603_reg_st_12001200_1分でわかる_0310.jpg":"1I6t5-VfiFA1jt3xQRGYOyV8Fib6nGty2","p-max_年収診断_202603_reg_st_12001200_今すぐ試すpsd_0310.jpg":"14_fUFYeGKvzEQk9E4bbeqmWWN2LBFVtX","p-max_年収診断_202604_reg_st_1200x1200_7つの質問_0414_.jpg":"1s6HtclEepamQj0_sJs6wjmIiIPfX9yzf","p-max_年収診断_202604_reg_st_1200x1200_想定年収_0414_.jpg":"1lp1fH_nwBuUmafIiX-QgHytfTDevMQqw","p-max_年収診断_202605_reg_st_1200x1200_スマホで手軽に想定年収診断__0515.jpg":"13kKWgj21QQq10X2y16YYllnlKykYwCtl","p-max_年収診断_202605_reg_st_1200x1200_想定年収診断します_0515.jpg":"1oREI5ZkgiLjCthwhNnR45u9FGJMRk2Y1","p-max_歯科医師_202512_app_st_12001200_年収1000万円以上可_1217.jpg":"1qrDy5-eCmMovsZv3Buy9YGtZwpdd6cYd","p-max_歯科医師_202512_app_st_12001200_条件訴求_1217.jpg":"1Rb8Kkbc82R2HScP6Wrtiaz0xeqdRtp2b","p-max_歯科医師_202604_reg_st_1200x1200_資格取得支援_0414_.jpg":"1ZqLlFP_wGq-M1Ww-h0dIBalt34Nm4jB2","p-max_歯科医師_202604_reg_st_1200x1200_転職ペース×登録促進_0414_.jpg":"1YoIhuduQJBYp2ifid39hFWkdv_zkWhFi","p-max_歯科医師_202605_reg_st_1200x1200_長期休暇あり_0515.jpg":"1cnt8UGovOtNGUTuJSkkEWeIGBqkhxELz","p-max_歯科衛生士_202512_app_st_12001200_18時退社・時短勤務_1217.jpg":"1_1qvnJFqcxwPcMHz-3NeBoBphGsmg39z","p-max_歯科衛生士_202512_app_st_12001200_月給40万円以上可_1217.jpg":"1Aynegf6iOD5W7jPNjG_5TPKJrzmQEa8A","p-max_歯科衛生士_202602_app_st_12001200_オープン３年以内_0210.jpg":"1KmHEwnCXTvmFO7jFhAJrEp3D_Sk2i07B","p-max_歯科衛生士_202602_app_st_12001200_月給40万円以上可能_0210.jpg":"1Ju7VUl45E67qi2RTlf2zomcqvUwMixWm","p-max_歯科衛生士_202603_app_st_12001200_オープン3年以内_0310.jpg":"1V5EmqiW1bEEIRAnV-gVAP8rAPiv6avza","p-max_歯科衛生士_202603_app_st_12001200_必見_0310.jpg":"1drX1gtxKmAOrMDWMBiNqKXfT3EvATrWZ","p-max_汎用_202512_app_st_12001200_ぴったりの求人_1217.jpg":"1MpOTbD-Wk_38Pd5Egszs_qFh-4q8IPlY","p-max_汎用_202512_app_st_12001200_スカウト経由の応募内定率_1217.jpg":"1NcJLj4DcwF6YzlbHbHN-FJisP5E0qA6v","p-max_汎用_202512_app_st_12001200_自宅から近い_1217.jpg":"18idhESbG96dK41o28IAAJtEnG49YGJ54","p-max_汎用_202512_reg_st_12001200_スキマ時間_1217.jpg":"1lb8ESxWaEBnUcH_pJ4_L2SDxb5rPvj19","p-max_汎用_202512_reg_st_12001200_マイペース転職_1217.jpg":"15B5IQqrLlUaQwWdm6wu1hHbbDMr0ptE0","p-max_汎用_202512_reg_st_12001200_登録者数272万人_1217.jpg":"1e0ZGdNPNjjpdGO9mey9udYb2d8wc3uwC","p-max_汎用_202601_app_st_12001200_入職希望の方向け_0209.jpg":"1pbX-BPI4SZEhjlwJ9Tlorvlevu0wOBP1","p-max_汎用_202601_app_st_12001200_正職員求人2_0209.jpg":"1gai0O2NMmPvvIlHyAJQhDrGcOHm496O5","p-max_汎用_202601_app_st_12001200_正職員求人_0209.jpg":"1h2JwXIXg_ymg5C0-4bqoS56434_svOgf","p-max_汎用_202601_reg_st_12001200_1分で確認_0209.jpg":"19jMwDec_gVONWl3cf28COQB11RFjTI52","p-max_汎用_202601_reg_st_12001200_全国50万件以上_0209修正.jpg":"1kp5gpjY9sqKAqnhOARd7H_gmZYjRd6Q1","p-max_汎用_202601_reg_st_12001200_隙間時間_0209修正.jpg":"1nKEYd-FLholDDLR1x19WcEiCt4bgS128","p-max_汎用_202602_app_st_12001200_地図検索機能_0210.jpg":"19NQIPoIJ0Gi00yx3snPhyWSR4vLqsqIO","p-max_汎用_202602_app_st_12001200_急募A_0210.jpg":"1W2npBpBxc1cdDB09l64LvzmOaXawAnsz","p-max_汎用_202602_app_st_12001200_急募B_0210.jpg":"1i6Lh-n782iU3ka-SR6d_mbeT3DwyGkCs","p-max_汎用_202602_app_st_12001200_新着求人_0210.jpg":"1AykfCoG3cBc1BGZcOOi4A1TZMqjRoukG","p-max_汎用_202602_reg_st_12001200_プロフィール登録_0210.jpg":"1iff3yc6Gu_MkVUFubEN8T-UFaWZjndlx","p-max_汎用_202602_reg_st_12001200_求人数no1_0210.jpg":"1lLRrB6aWk_T-Anc8ohVkeZr75ov-gzDj","p-max_汎用_202602_reg_st_12001200_転職希望者必見_0210.jpg":"1B5_0UUPaB53dj2dM6LUg3fhSa8_3WYUj","p-max_汎用_202603_app_st_1200x1200_事業所とやりとり_0310.jpg":"1FCqH7eVi1UUcR6KAlL3o0_nWc_maSUFH","p-max_汎用_202603_app_st_1200x1200_豊富な求人_0310.jpg":"17-i8qnsmH9FRwgwsM7yRygUtMZn8lv75","p-max_汎用_202603_reg_st_1200x1200_スカウト経由の応募_0323修正.jpg":"19WLcZ-PjH2gmv7jSx8fHBcYhsNSbBsvp","p-max_汎用_202603_reg_st_1200x1200_応募前チェック_0323修正.jpg":"1JqwINL8Evscc_fqOlkuNEZ47ZQam-R7Z","p-max_汎用_202603_reg_st_1200x1200_求人数NO1_0310.jpg":"1NNxTmmW2F1UgtI0NqEoC_iyAg2li6f0L","p-max_汎用_202603_reg_st_1200x1200_看護・介護・保育求人数No1_0310.jpg":"1ehPKmXQZcHa5Ve-WpoFumBF8303aik09","p-max_汎用_202604_reg_st_1200x1200_希望の条件_0414.jpg":"1JRgNZexDLPN3fqpnud4mQwrpUqcZMogI","p-max_汎用_202605_reg_st_1200x1200_スキマ時間BU_0526修正.jpg":"1LD0u3IymIA7AKNxO8gsI-qQArsvVoTD6","p-max_理学療法士_202512_reg_st_12001200_小児リハビリ・脳血管リハビリ_1217.jpg":"1zcYQSnqaHWtXeXVV-kAJxiLWP7k-o213","p-max_理学療法士_202602_reg_st_12001200_月給50万円以上可能_0210.jpg":"1yxtU3Bu0qldCsqP1aCi1xn--X0Nq-tZo","p-max_生活支援員_202512_app_st_12001200_月給35万円以上可_1217.jpg":"1--IrFcnf5vszGBgKgUWfTFvWcDovNwSO","p-max_看護師_202512_app_st_12001200_日勤のみ可・残業ほぼなし_1217.jpg":"1UFm6TreK1Bpb8jWJxc01i3O1hHgCjI6t","p-max_看護師_202512_app_st_12001200_診療科目_1217.jpg":"1TaM_3ekZCgzML8CYtukstvww0QaI9xBP","p-max_看護師_202512_reg_st_12001200_いつでも確認_1217.jpg":"1pozEO8S9_WvEKTnCTKzrywhMj_RcHtD3","p-max_看護師_202512_reg_st_12001200_施設訴求_1217.jpg":"1vOk3DT4wSZtKV7raJm_TPHJs0C8reml5","p-max_看護師_202604_reg_st_1200x1200_あなたを求める職場_0414_.jpg":"1fOfbUxG-1tlDbC8Ppcz6ZVh3h_FASxrP","p-max_看護師_202604_reg_st_1200x1200_好条件×スカウト_0414.jpg":"169LwNUdxdhZK9O5I333ZHBgTnYv-HWAD","p-max_看護師_202604_reg_st_1200x1200_年収600万円以上可_0414_.jpg":"1o-TZzcgELf9LaE5GKqEeDAjGt9EnIw7w","p-max_看護師_202604_reg_st_1200x1200_選ばれる側BU_0414_.jpg":"1zgPtwZWKJUiL_JT7C_G9cx7J7nubFpF5","p-max_看護師_202605_reg_st_1200x1200_ブランク可×研修制度あり_0515.jpg":"1cY4WJ1PeU-jGAJWkuP2rE0CsPA4LXL50","p-max_看護師_202605_reg_st_1200x1200_好条件×スカウト_0515.jpg":"1Z9Ih7d3kKc4IiXmpqUU1ESnTwA_-do7g","p-max_看護師_202605_reg_st_1200x1200_復職BBU_0515.jpg":"1u0o44036pWfFxNN717GU-vLd1cXydysu","p-max_薬剤師_202602_app_st_12001200_オープン3年以内_0210.jpg":"1klxIbaqGF0MD0ctyKM0KMPxvptIroITF","p-max_薬剤師_202602_app_st_12001200_年収700万円以上可能_0210.jpg":"1Ck7kuKu9c6Jez2C_l963HlYJvhOYncF0","p-max_薬剤師_202603_app_st_1200x1200_年収700万円以上可能_0310.jpg":"1-wkvxIssea6Eav6SQeqvMoW5z3qgd8GA","p-max_薬剤師_202603_app_st_1200x1200_年間休日120日以上残業ほぼなし_0310.jpg":"1Qz-nzAzj2JWuZsKLTh_gaEaxWlnSLW0p","p-max_薬剤師_202604_app_st_1200x1200_月給60万円以上可_0414_.jpg":"1hxNfyutdf5KiE0U31CwilVg7Ls_XffaX"};
 
 const T=[
 {s:"ケアマネジャー",c:"緑青",k:"比較検討",v:"イラスト",f:"p-max_ケアマネジャー_202512_reg_st_12001200_比較検討_1217.jpg"},{s:"ケアマネジャー",c:"緑青",k:"有資格",v:"実写",f:"p-max_ケアマネジャー_202512_reg_st_12001200_有資格_1217.jpg"},
@@ -250,9 +248,6 @@ const T=[
 {s:"薬剤師",c:"緑青",k:"ワークライフ",v:"イラスト",f:"p-max_薬剤師_202601_app_st_12001200_ワークライフ_0209.jpg"},{s:"薬剤師",c:"緑青",k:"月給60万円",v:"実写",f:"p-max_薬剤師_202601_app_st_12001200_月給60万円_0209.jpg"},{s:"薬剤師",c:"緑青",k:"オープン3年以内",v:"イラスト",f:"p-max_薬剤師_202602_app_st_12001200_オープン3年以内_0210.jpg"},{s:"薬剤師",c:"緑青",k:"年収700万円以上可能",v:"実写",f:"p-max_薬剤師_202602_app_st_12001200_年収700万円以上可能_0210.jpg"},{s:"薬剤師",c:"緑青",k:"年間休日120日以上残業ほぼなし",v:"イラスト",f:"p-max_薬剤師_202603_app_st_1200x1200_年間休日120日以上残業ほぼなし_0310.jpg"},{s:"薬剤師",c:"緑青",k:"年収700万円以上可能",v:"実写",f:"p-max_薬剤師_202603_app_st_1200x1200_年収700万円以上可能_0310.jpg"},{s:"薬剤師",c:"緑青",k:"月給60万円以上可",v:"実写",f:"p-max_薬剤師_202604_app_st_1200x1200_月給60万円以上可_0414_.jpg"},{s:"薬剤師",c:"緑青",k:"総求人数",v:"実写",f:"p-max_薬剤師_202604_app_st_1200x1200_総求人数_0415.jpg"},{s:"薬剤師",c:"緑青",k:"月給50万円以上可×残業ほぼなし",v:"実写",f:"p-max_薬剤師_202605_app_st_1200x1200_月給50万円以上可×残業ほぼなし_0515.jpg"},
 {s:"理学療法士",c:"緑青",k:"小児リハビリ・脳血管リハビリ",v:"実写",f:"p-max_理学療法士_202512_reg_st_12001200_小児リハビリ・脳血管リハビリ_1217.jpg"},{s:"理学療法士",c:"緑青",k:"月給50万円以上可能",v:"実写",f:"p-max_理学療法士_202602_reg_st_12001200_月給50万円以上可能_0210.jpg"},
 ];
-</script>
-<script>
-
 
 const SHOKUS=[...new Set(T.map(t=>t.s))];
 const CMAP={"緑青":"#41C2BE","赤":"#FF4F7E","オレンジ":"#F7B000","青":"#102B5B"};
@@ -355,61 +350,39 @@ function makePrompt(t,shoku,copy,cta){
 }
 
 function makeCombined(tA,tB,shoku,copy,cta){
-  const vA=tA?tA.v:'実写',vB=tB?tB.v:'イラスト';
-  const clA=tA?tA.c:'緑青',clB=tB?tB.c:'緑青';
-  const refA=tA?`「${tA.k}」(${tA.s} / ${tA.v})`:'なし';
-  const refB=tB?`「${tB.k}」(${tB.s} / ${tB.v})`:'なし';
-  const blendedColors=[...new Set([PAL[clA],PAL[clB]])].join(' / ');
-  return `以下の2つのバナープロンプトを組み合わせ、新しい統一されたデザイン方向性で1:1の正方形画像を生成してください。
-画像は2x2の4分割コンセプトボード形式で生成してください。
-
-━━━━━━━━━━━━━━━━━
-参照バナー A: ${refA}
-参照バナー B: ${refB}
-━━━━━━━━━━━━━━━━━
-
-Output format:
-2x2グリッドの1:1正方形画像（各象限が独立したバナーデザイン案）
-
-Unified concept:
-${shoku}向け転職サービス「ジョブメドレー」の訴求バナー
-メインコピー：「${copy}」
-CTA：${cta}
-
-Design directions per quadrant:
-┌──────────┬──────────┐
-│  Q1: ${vA}ベース  │  Q2: ${vB}ベース  │
-│  参照A寄り      │  参照B寄り      │
-├──────────┼──────────┤
-│  Q3: ミックス1  │  Q4: ミックス2  │
-│  大胆な実験案   │  洗練された統合  │
-└──────────┴──────────┘
-
-Shared design rules (apply to all 4):
-Colors: ${blendedColors}
-Brand: ジョブメドレーロゴ＋「${cta}」を各象限フッターに配置
-Target: ${shoku}への転職・求職者（登場人物は必ず${shoku}に限定）
-Text/copy: 「${copy}」を各象限に大きく配置
-Style: 医療・介護系プロフェッショナル / 清潔感・信頼感
-
-Q1 specifics (${vA}ベース):
-- Layout: ${LAY[vA]||LAY['実写']}
-- Mood: ${MOO[clA]||MOO['緑青']}
-
-Q2 specifics (${vB}ベース):
-- Layout: ${LAY[vB]||LAY['実写']}
-- Mood: ${MOO[clB]||MOO['緑青']}
-
-Q3 specifics (大胆なミックス):
-- 両スタイルの視覚要素を大胆に融合
-- コントラストを最大化
-
-Q4 specifics (洗練された統合):
-- 両スタイルを自然にブレンド
-- 最も実制作に近い完成イメージ
-
-Must keep: ジョブメドレーブランドカラー / ${shoku}の人物または関連イラスト
-Avoid: ブランドイメージを損なう表現 / 医療系に不適切な表現`;
+  const refs=[tA,tB].filter(Boolean);
+  const refLine=refs.length?`参照バナー：${refs.map(t=>`「${t.k}」(${t.v})`).join('、')}\n`:'';
+  const vtype=refs.length?refs[0].v:'実写';
+  const color=refs.length?refs[0].c:'緑青';
+  return `${refLine}以下の2つのバナープロンプトを組み合わせ、新しい統一されたデザイン方向性で1:1の正方形画像を生成してください。 画像は2x2の4分割コンセプトボード形式で生成してください。
+Layout:
+${LAY[vtype]||LAY['実写']}
+Colors:
+${PAL[color]||PAL['緑青']}
+Visual type:
+${shoku}の${VIS[vtype]||VIS['実写']}
+Main visual:
+${shoku}の${VIS[vtype]||VIS['実写']}
+Text/copy:
+${shoku}
+${copy}
+ジョブメドレー
+Target:
+${shoku}への転職・求職者（登場人物・職場環境は必ず${shoku}に関連するものに限定）
+CTA:
+${cta}
+Style:
+${STY[vtype]||STY['実写']}
+Mood:
+${MOO[color]||MOO['緑青']}
+Must keep:
+${MUS[vtype]||MUS['実写']}
+Avoid:
+${AVO[vtype]||AVO['実写']}
+Priority:
+1. メインコピー「${copy}」の視認性
+2. ${shoku}ターゲットへの的確な訴求
+3. ジョブメドレーブランドとの一貫性`;
 }
 
 function highlight(text,keyClass='pk'){
@@ -459,11 +432,8 @@ function copyAll(){
 }
 function restart(){sel=[];fCTA='app';document.getElementById('f-shoku').value='';document.getElementById('f-copy').value='';setCTA('app');updateBar();renderGrid();showScreen(1);}
 
-window.onload = function() {
-  document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>setVtype(c.dataset.vtype)));
-  init();
-};
-
+document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>setVtype(c.dataset.vtype)));
+init();
 </script>
 </body>
-
+</html>

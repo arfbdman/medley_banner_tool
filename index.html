@@ -352,8 +352,6 @@ function makePrompt(t,shoku,copy,cta){
 function makeCombined(tA,tB,shoku,copy,cta){
   const refs=[tA,tB].filter(Boolean);
   const refLine=refs.length?`参照バナー：${refs.map(t=>`「${t.k}」(${t.v})`).join('、')}\n`:'';
-  const vtA=tA?tA.v:'実写';
-  const vtB=tB?tB.v:'イラスト';
   const color=refs.length?refs[0].c:'緑青';
   const pal=PAL[color]||PAL['緑青'];
   const avoid=`過度な演出 / 加工感 / 暗いトーン / メリットアイコン・箇条書き・特典リスト・3つのポイント等の追加情報を一切入れないこと / Text/copyに記載されていないテキストを追加しないこと`;
@@ -361,36 +359,34 @@ function makeCombined(tA,tB,shoku,copy,cta){
 
 【全象限共通ルール】
 Colors: ${pal}
-Text/copy（全象限共通）: ${copy} / ジョブメドレー
+Text/copy（全象限共通・追加テキスト禁止）: ${copy} / ジョブメドレー
 Target: ${shoku}への転職・求職者（登場人物・職場環境は必ず${shoku}に関連するものに限定）
 CTA（全象限フッターに配置）: ${cta}
 Avoid（全象限厳守）: ${avoid}
 
-【Q1 – 左上：${vtA}ベース / 人物大きめ・コピー左寄せ】
-Layout: 人物写真を右側に大きく配置。コピーを左上に縦積み。フッターにロゴ＋CTA。
-Visual type: ${shoku}の${VIS[vtA]||VIS['実写']}
-Style: ${STY[vtA]||STY['実写']}
-Mood: ${MOO[color]||MOO['緑青']}
-Must keep: ${MUS[vtA]||MUS['実写']}
+【Q1 – 左上：実写ベース】
+Visual type: ${shoku}の人物写真（笑顔・清潔感・職場環境）
+Layout: 人物写真を主役に配置。テキストスペースを確保。下部にジョブメドレーロゴ＋CTA。
+Style: 写真＋シンプルテキストレイアウト / 医療・介護系プロフェッショナル
+Must keep: 自然な笑顔 / 職場環境感 / 清潔感
 
-【Q2 – 右上：${vtB}ベース / コピー中央・背景カラーブロック】
-Layout: 背景を2分割（上：ブランドカラー、下：ホワイト）。コピーを中央大きく。人物またはイラストを右下に配置。
-Visual type: ${shoku}の${VIS[vtB]||VIS['イラスト']}
-Style: ${STY[vtB]||STY['イラスト']}
-Mood: ${MOO[color]||MOO['緑青']}
-Must keep: ${MUS[vtB]||MUS['イラスト']}
+【Q2 – 右上：イラストベース】
+Visual type: ${shoku}のフラット線画イラストキャラクター
+Layout: フラット線画キャラクターを配置。中央に大型コピースペース。下部にジョブメドレーロゴ＋CTA。
+Style: フラットベクターイラスト / 親しみやすいミニマルデザイン
+Must keep: 線画タッチ / フラットデザイン / 親しみやすいキャラクター
 
-【Q3 – 左下：ミックス / コピー最大化・人物背景処理】
-Layout: 人物写真を背景全面に薄くオーバーレイ。コピーを超大きく中央配置。フッターにロゴ＋CTA。
-Visual type: ${shoku}の人物写真（背景として使用・テキスト視認性優先）
-Style: タイポグラフィ主体 / 高コントラスト / ブランドカラー背景
-Mood: エネルギッシュ・行動促進
+【Q3 – 左下：テキストのみ】
+Visual type: タイポグラフィ中心
+Layout: 巨大なメインコピーを中央配置。背景はブランドカラーのシンプルな幾何学模様。下部にジョブメドレーロゴ＋CTA。
+Style: タイポグラフィ主体 / 高コントラスト / 視認性重視
+Must keep: 巨大文字 / 高コントラスト / シンプルな構成
 
-【Q4 – 右下：ミックス / 縦分割レイアウト・最も完成度高く】
-Layout: 左1/3をブランドカラー帯（ロゴ＋CTA縦置き）、右2/3に人物写真＋コピーオーバーレイ。
-Visual type: ${shoku}の${VIS[vtA]||VIS['実写']}
-Style: 洗練されたグリッドレイアウト / 実制作に最も近い完成形
-Mood: ${MOO[color]||MOO['緑青']}
+【Q4 – 右下：新しい表現（自由提案）】
+Visual type: 上記3つにとらわれない、新しいクリエイティブ表現
+Layout: デザイナーの自由な発想で構成。ただし下部にジョブメドレーロゴ＋CTAは必須。
+Style: 上記3案とは異なる独自スタイル（コラージュ・グラデーション・UIモックアップ・大胆な構図など）
+Must keep: ブランドカラー / コピーの視認性 / ジョブメドレーロゴ
 
 Priority（全象限共通）:
 1. メインコピー「${copy}」の視認性

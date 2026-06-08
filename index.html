@@ -524,8 +524,11 @@ function openChatGPT(){
   const url='https://chatgpt.com/g/g-6a1ff20dbd0c819181d629f019e99f41-4-pattern-banner-mixer';
   const w=Math.floor(screen.width/2);
   const h=screen.height;
-  const left=Math.floor(screen.width/2);
-  window.open(url,'chatgpt_banner','width='+w+',height='+h+',left='+left+',top=0,resizable=yes,scrollbars=yes');
+  // Resize current window to left half
+  window.moveTo(0,0);
+  window.resizeTo(w,h);
+  // Open ChatGPT in right half
+  window.open(url,'chatgpt_banner','width='+w+',height='+h+',left='+w+',top=0,resizable=yes,scrollbars=yes');
 }
 
 document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>setVtype(c.dataset.vtype)));

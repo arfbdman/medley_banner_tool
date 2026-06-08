@@ -110,8 +110,31 @@
   .btn-copyall:hover{border-color:var(--teal);background:rgba(65,194,190,.08)}
   .btn-restart{background:#fff;color:var(--navy);border:2px solid var(--border);padding:12px 24px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;transition:all .15s;width:100%}
   .btn-restart:hover{border-color:var(--teal);color:var(--teal)}
+  .btn-chatgpt{width:100%;padding:14px 20px;background:linear-gradient(135deg,#10a37f,#1a7f5a);color:#fff;border:none;border-radius:14px;font-family:'Noto Sans JP',sans-serif;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:14px;margin-bottom:10px;text-align:left}
+  .btn-chatgpt:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(16,163,127,.35)}
+  .btn-chatgpt-icon{font-size:22px;flex-shrink:0}
+  .btn-chatgpt-text{flex:1;display:flex;flex-direction:column;gap:2px}
+  .btn-chatgpt-main{font-size:14px;font-weight:700;letter-spacing:.02em}
+  .btn-chatgpt-sub{font-size:11px;opacity:.75;font-weight:400}
+  .btn-chatgpt-arrow{font-size:18px;opacity:.8;flex-shrink:0}
   /* img auth notice */
   .img-notice{background:#FFF8E6;border:1px solid #F7D070;border-radius:10px;padding:10px 16px;font-size:12px;color:#7A5800;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+
+  /* HOW TO BAR */
+  .howto-bar{background:linear-gradient(135deg,#0E1E3D 0%,#162845 100%);border-bottom:1px solid rgba(65,194,190,.25);padding:18px 32px 14px;position:relative}
+  .howto-close{position:absolute;top:12px;right:16px;background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.5);width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+  .howto-close:hover{background:rgba(255,255,255,.2);color:#fff}
+  .howto-inner{max-width:1100px;margin:0 auto}
+  .howto-title{color:var(--teal);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;font-family:'DM Mono',monospace}
+  .howto-steps{display:flex;align-items:flex-start;gap:4px;margin-bottom:12px;flex-wrap:wrap}
+  .howto-step{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 14px;flex:1;min-width:160px}
+  .howto-step-icon{font-size:20px;margin-bottom:4px}
+  .howto-step-num{font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--teal);font-family:'DM Mono',monospace;margin-bottom:3px}
+  .howto-step-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px}
+  .howto-step-desc{font-size:11px;color:rgba(255,255,255,.5);line-height:1.5}
+  .howto-arrow{color:rgba(65,194,190,.4);font-size:18px;padding-top:28px;flex-shrink:0}
+  .howto-note{font-size:11px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding-top:6px;border-top:1px solid rgba(255,255,255,.06)}
+  @media(max-width:768px){.howto-arrow{display:none}.howto-step{min-width:140px}}
 </style>
 </head>
 <body>
@@ -126,6 +149,47 @@
   </nav>
 </header>
 
+<!-- HOW TO USE BANNER -->
+<div class="howto-bar" id="howto-bar">
+  <button class="howto-close" onclick="document.getElementById('howto-bar').style.display='none'" title="閉じる">✕</button>
+  <div class="howto-inner">
+    <div class="howto-title">💡 使い方ガイド</div>
+    <div class="howto-steps">
+      <div class="howto-step">
+        <div class="howto-step-icon">🖼</div>
+        <div class="howto-step-num">STEP 1</div>
+        <div class="howto-step-title">参照バナーを選ぶ</div>
+        <div class="howto-step-desc">過去バナーから最大2枚を選択。職種・素材タイプで絞り込み可能。</div>
+      </div>
+      <div class="howto-arrow">→</div>
+      <div class="howto-step">
+        <div class="howto-step-icon">✏️</div>
+        <div class="howto-step-num">STEP 2</div>
+        <div class="howto-step-title">情報を入力する</div>
+        <div class="howto-step-desc">職種・訴求コピー・CTAを入力してプロンプトを生成。</div>
+      </div>
+      <div class="howto-arrow">→</div>
+      <div class="howto-step">
+        <div class="howto-step-icon">📋</div>
+        <div class="howto-step-num">STEP 3</div>
+        <div class="howto-step-title">プロンプトをコピー</div>
+        <div class="howto-step-desc">生成された統合プロンプトをコピーして Custom GPT に貼り付け。</div>
+      </div>
+      <div class="howto-arrow">→</div>
+      <div class="howto-step">
+        <div class="howto-step-icon">✨</div>
+        <div class="howto-step-num">OUTPUT</div>
+        <div class="howto-step-title">2×2コンセプトボード</div>
+        <div class="howto-step-desc">実写・イラスト・テキスト・新表現の4案が1枚の画像で出力される。</div>
+      </div>
+    </div>
+    <div class="howto-note">
+      <span class="howto-note-icon">🔐</span> 画像サムネイルはCyberAgentアカウントでGoogleにログイン中のブラウザのみ表示されます
+      <span style="margin-left:16px">💬</span> 生成画像の修正は ChatGPT 上で「左上だけ修正して」のように指示できます
+    </div>
+  </div>
+</div>
+
 <!-- SCREEN 1 -->
 <div class="screen active" id="screen1">
   <div class="browse-layout">
@@ -134,7 +198,6 @@
       <div id="shoku-list"></div>
     </aside>
     <main class="browse-main">
-      <div class="img-notice">🔐 画像はCyberAgentアカウントでGoogleにログイン中のブラウザでのみ表示されます</div>
       <div class="browse-header">
         <h1 class="browse-title" id="browse-title">全テンプレート</h1>
         <span class="browse-count" id="browse-count"></span>
@@ -225,7 +288,15 @@
     </div>
 
     <button class="btn-copyall" onclick="copyAll()">📋 すべてのプロンプトをまとめてコピー</button>
-    <button class="btn-restart" onclick="restart()">🔄 最初からやり直す</button>
+    <button class="btn-chatgpt" onclick="openChatGPT()">
+  <span class="btn-chatgpt-icon">✨</span>
+  <div class="btn-chatgpt-text">
+    <span class="btn-chatgpt-main">Custom GPT で画像を生成する</span>
+    <span class="btn-chatgpt-sub">4 Pattern Banner Mixer を新しいウィンドウで開きます（左右分割推奨）</span>
+  </div>
+  <span class="btn-chatgpt-arrow">↗</span>
+</button>
+<button class="btn-restart" onclick="restart()">🔄 最初からやり直す</button>
   </div>
 </div>
 
@@ -448,6 +519,14 @@ function copyAll(){
   });
 }
 function restart(){sel=[];fCTA='app';document.getElementById('f-shoku').value='';document.getElementById('f-copy').value='';setCTA('app');updateBar();renderGrid();showScreen(1);}
+
+function openChatGPT(){
+  const url='https://chatgpt.com/g/g-6a1ff20dbd0c819181d629f019e99f41-4-pattern-banner-mixer';
+  const w=Math.floor(screen.width/2);
+  const h=screen.height;
+  const left=Math.floor(screen.width/2);
+  window.open(url,'chatgpt_banner','width='+w+',height='+h+',left='+left+',top=0,resizable=yes,scrollbars=yes');
+}
 
 document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>setVtype(c.dataset.vtype)));
 init();

@@ -20,16 +20,25 @@
   .step-dot.idle{background:rgba(255,255,255,.12);color:rgba(255,255,255,.4)}
   .screen{display:none}.screen.active{display:block}
   /* BROWSE */
-  .browse-layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 56px)}
-  .sidebar{background:var(--navy2);padding:20px 12px;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto}
-  .sidebar::-webkit-scrollbar{width:4px}.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
-  .sidebar-title{color:rgba(255,255,255,.35);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:0 8px 10px}
-  .shoku-btn{width:100%;text-align:left;padding:9px 12px;border-radius:8px;border:none;background:transparent;color:rgba(255,255,255,.6);font-family:'Noto Sans JP',sans-serif;font-size:13px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:space-between}
-  .shoku-btn:hover{background:rgba(255,255,255,.07);color:#fff}
-  .shoku-btn.active{background:var(--teal);color:#fff;font-weight:700}
-  .shoku-count{background:rgba(255,255,255,.15);border-radius:10px;font-size:11px;padding:1px 7px}
-  .shoku-btn.active .shoku-count{background:rgba(255,255,255,.25)}
-  .browse-main{padding:24px 28px}
+  .browse-layout{display:block;min-height:calc(100vh - 56px)}
+  /* Sidebar → horizontal shoku bar */
+  .sidebar{background:var(--navy2);padding:10px 20px;display:flex;align-items:center;gap:8px;overflow-x:auto;white-space:nowrap;flex-shrink:0}
+  .sidebar::-webkit-scrollbar{height:3px}.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+  .sidebar-title{color:rgba(255,255,255,.35);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;flex-shrink:0;display:none}
+  .shoku-btn{text-align:left;padding:6px 12px;border-radius:20px;border:1.5px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.6);font-family:'Noto Sans JP',sans-serif;font-size:12px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0}
+  .shoku-btn:hover{border-color:var(--teal);color:#fff}
+  .shoku-btn.active{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:700}
+  .shoku-count{background:rgba(255,255,255,.2);border-radius:10px;font-size:10px;padding:0 6px}
+  .shoku-btn.active .shoku-count{background:rgba(255,255,255,.3)}
+  /* App shell: persistent left + right panel */
+  .app-shell{display:grid;grid-template-columns:1fr 420px;min-height:calc(100vh - 56px);position:relative}
+  @media(max-width:900px){.app-shell{grid-template-columns:1fr}.right-panel{height:auto;position:relative;border-top:2px solid var(--teal)}}
+  .left-panel{display:flex;flex-direction:column;border-right:1px solid var(--border);min-height:calc(100vh - 56px);overflow:hidden}
+  .right-panel{background:var(--surface);overflow-y:auto;height:calc(100vh - 56px);position:sticky;top:56px}
+  .right-panel-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--muted);gap:12px;padding:40px}
+  .right-panel-empty-icon{font-size:40px;opacity:.4}
+  .right-panel-empty-text{font-size:13px;text-align:center;line-height:1.6;opacity:.7}
+  .browse-main{padding:20px 24px;flex:1;overflow-y:auto}
   .browse-header{display:flex;align-items:center;gap:14px;margin-bottom:20px}
   .browse-title{font-size:20px;font-weight:900;color:var(--navy)}
   .browse-count{color:var(--muted);font-size:13px}
@@ -62,7 +71,7 @@
   .btn-clear{background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);border:none;padding:7px 13px;border-radius:8px;font-size:12px;cursor:pointer;font-family:'Noto Sans JP',sans-serif}
   .btn-clear:hover{background:rgba(255,255,255,.18)}
   /* FORM */
-  .form-screen{max-width:720px;margin:0 auto;padding:36px 24px 80px}
+  .form-screen{max-width:100%;margin:0;padding:24px 20px 80px}
   .form-back{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;cursor:pointer;margin-bottom:24px;background:none;border:none;font-family:'Noto Sans JP',sans-serif}
   .form-back:hover{color:var(--text)}
   .selected-cards{display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap}
@@ -83,14 +92,14 @@
   .btn-generate{width:100%;padding:15px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Noto Sans JP',sans-serif;margin-top:8px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px}
   .btn-generate:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(65,194,190,.32)}
   /* PROMPT */
-  .prompt-screen{max-width:820px;margin:0 auto;padding:36px 24px 80px}
+  .prompt-screen{max-width:100%;margin:0;padding:24px 20px 80px}
   .prompt-title{font-size:22px;font-weight:900;color:var(--navy);margin-bottom:24px}
   .prompt-cards{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
   .prompt-ref{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:6px 12px 6px 6px;font-size:12px;color:var(--muted)}
   .prompt-ref img{width:36px;height:36px;border-radius:6px;object-fit:cover;background:var(--tag)}
   .prompt-ref strong{color:var(--text);font-weight:700}
   /* TWO PROMPT BOXES */
-  .prompt-boxes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  .prompt-boxes{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:12px}
   .prompt-box{background:var(--navy);border-radius:16px;overflow:hidden}
   .prompt-box.combined{grid-column:1/-1}
   .prompt-box-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -190,11 +199,12 @@
   </div>
 </div>
 
-<!-- SCREEN 1 -->
-<div class="screen active" id="screen1">
-  <div class="browse-layout">
-    <aside class="sidebar">
-      <div class="sidebar-title">職種</div>
+<!-- APP SHELL: persistent left browse + right panel for steps 2&3 -->
+<div class="app-shell">
+
+  <!-- LEFT: browse always visible -->
+  <div class="left-panel">
+    <aside class="sidebar" id="shoku-bar">
       <div id="shoku-list"></div>
     </aside>
     <main class="browse-main">
@@ -211,92 +221,97 @@
       </div>
       <div class="template-grid" id="template-grid"></div>
     </main>
-  </div>
-  <div class="selection-bar" id="selection-bar">
-    <span class="sel-info">参照: <strong id="sel-count">0</strong>/2 選択中</span>
-    <button class="btn-clear" onclick="clearSel()">クリア</button>
-    <button class="btn-next" onclick="goForm()">フォームへ →</button>
-  </div>
-</div>
-
-<!-- SCREEN 2 -->
-<div class="screen" id="screen2">
-  <div class="form-screen">
-    <button class="form-back" onclick="goBack(2)">← テンプレート選択に戻る</button>
-    <div class="selected-cards" id="sel-preview"></div>
-    <div class="form-section">
-      <h3>バナー設定</h3>
-      <div class="form-row">
-        <label class="form-label">職種<span>*</span></label>
-        <select id="f-shoku">
-          <option value="">選択してください</option>
-          <option>ケアマネジャー</option><option>医師</option><option>介護職</option>
-          <option>介護職-ヘルパ</option><option>看護師</option><option>歯科医師</option>
-          <option>歯科衛生士</option><option>児童指導員</option><option>生活支援員</option>
-          <option>年収診断</option><option>汎用</option><option>保育士</option>
-          <option>薬剤師</option><option>理学療法士</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label class="form-label">訴求コピー<span>*</span></label>
-        <input type="text" id="f-copy" placeholder="例：月給35万円以上可、残業ほぼなし" />
-      </div>
-      <div class="form-row">
-        <label class="form-label">CTA<span>*</span></label>
-        <div class="cta-toggle">
-          <div class="cta-option active" id="cta-app" onclick="setCTA('app')">今すぐ応募</div>
-          <div class="cta-option" id="cta-reg" onclick="setCTA('reg')">今すぐ登録</div>
-        </div>
-      </div>
+    <div class="selection-bar" id="selection-bar">
+      <span class="sel-info">参照: <strong id="sel-count">0</strong>/2 選択中</span>
+      <button class="btn-clear" onclick="clearSel()">クリア</button>
+      <button class="btn-next" onclick="goForm()">フォームへ →</button>
     </div>
-    <button class="btn-generate" onclick="generate()">✨ プロンプトを生成する</button>
   </div>
-</div>
 
-<!-- SCREEN 3 -->
-<div class="screen" id="screen3">
-  <div class="prompt-screen">
-    <button class="form-back" onclick="goBack(3)">← フォームに戻る</button>
-    <h1 class="prompt-title">生成されたプロンプト</h1>
-    <div class="prompt-cards" id="prompt-refs"></div>
+  <!-- RIGHT: step 2 and step 3 -->
+  <div class="right-panel" id="right-panel">
 
-    <div class="prompt-boxes">
-      <!-- Box A -->
-      <div class="prompt-box" id="box-a">
-        <div class="prompt-box-header">
-          <span class="prompt-box-title">参照バナー A</span>
-          <button class="btn-copy" onclick="copyBox('a')">📋 コピー</button>
+    <div class="right-panel-empty" id="right-empty" style="display:flex">
+      <div class="right-panel-empty-icon">👈</div>
+      <div class="right-panel-empty-text">左のテンプレートを<br>1〜2枚選択して<br>フォームへ進んでください</div>
+    </div>
+
+    <!-- SCREEN 2: Form -->
+    <div class="screen" id="screen2">
+      <div class="form-screen">
+        <button class="form-back" onclick="goBack(2)">← 選択に戻る</button>
+        <div class="selected-cards" id="sel-preview"></div>
+        <div class="form-section">
+          <h3>バナー設定</h3>
+          <div class="form-row">
+            <label class="form-label">職種<span>*</span></label>
+            <select id="f-shoku">
+              <option value="">選択してください</option>
+              <option>ケアマネジャー</option><option>医師</option><option>介護職</option>
+              <option>介護職-ヘルパ</option><option>看護師</option><option>歯科医師</option>
+              <option>歯科衛生士</option><option>児童指導員</option><option>生活支援員</option>
+              <option>年収診断</option><option>汎用</option><option>保育士</option>
+              <option>薬剤師</option><option>理学療法士</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label class="form-label">訴求コピー<span>*</span></label>
+            <input type="text" id="f-copy" placeholder="例：月給35万円以上可、残業ほぼなし" />
+          </div>
+          <div class="form-row">
+            <label class="form-label">CTA<span>*</span></label>
+            <div class="cta-toggle">
+              <div class="cta-option active" id="cta-app" onclick="setCTA('app')">今すぐ応募</div>
+              <div class="cta-option" id="cta-reg" onclick="setCTA('reg')">今すぐ登録</div>
+            </div>
+          </div>
         </div>
-        <div class="prompt-content" id="out-a"></div>
-      </div>
-      <!-- Box B -->
-      <div class="prompt-box" id="box-b">
-        <div class="prompt-box-header">
-          <span class="prompt-box-title pink">参照バナー B</span>
-          <button class="btn-copy" onclick="copyBox('b')">📋 コピー</button>
-        </div>
-        <div class="prompt-content" id="out-b"></div>
-      </div>
-      <!-- Combined -->
-      <div class="prompt-box combined">
-        <div class="prompt-box-header">
-          <span class="prompt-box-title gold">✦ 統合プロンプト（2×2コンセプトボード）</span>
-          <button class="btn-copy" onclick="copyBox('combined')">📋 コピー</button>
-        </div>
-        <div class="prompt-content tall" id="out-combined"></div>
+        <button class="btn-generate" onclick="generate()">✨ プロンプトを生成する</button>
       </div>
     </div>
 
-    <button class="btn-copyall" onclick="copyAll()">📋 すべてのプロンプトをまとめてコピー</button>
-    <button class="btn-chatgpt" onclick="openChatGPT()">
-  <span class="btn-chatgpt-icon">✨</span>
-  <div class="btn-chatgpt-text">
-    <span class="btn-chatgpt-main">Custom GPT で画像を生成する</span>
-    <span class="btn-chatgpt-sub">4 Pattern Banner Mixer を新しいウィンドウで開きます（左右分割推奨）</span>
-  </div>
-  <span class="btn-chatgpt-arrow">↗</span>
-</button>
-<button class="btn-restart" onclick="restart()">🔄 最初からやり直す</button>
+    <!-- SCREEN 3: Prompt output -->
+    <div class="screen" id="screen3">
+      <div class="prompt-screen">
+        <button class="form-back" onclick="goBack(3)">← フォームに戻る</button>
+        <h1 class="prompt-title">生成されたプロンプト</h1>
+        <div class="prompt-cards" id="prompt-refs"></div>
+        <div class="prompt-boxes">
+          <div class="prompt-box" id="box-a">
+            <div class="prompt-box-header">
+              <span class="prompt-box-title">参照バナー A</span>
+              <button class="btn-copy" onclick="copyBox('a')">📋 コピー</button>
+            </div>
+            <div class="prompt-content" id="out-a"></div>
+          </div>
+          <div class="prompt-box" id="box-b">
+            <div class="prompt-box-header">
+              <span class="prompt-box-title pink">参照バナー B</span>
+              <button class="btn-copy" onclick="copyBox('b')">📋 コピー</button>
+            </div>
+            <div class="prompt-content" id="out-b"></div>
+          </div>
+          <div class="prompt-box combined">
+            <div class="prompt-box-header">
+              <span class="prompt-box-title gold">✦ 統合プロンプト（2×2コンセプトボード）</span>
+              <button class="btn-copy" onclick="copyBox('combined')">📋 コピー</button>
+            </div>
+            <div class="prompt-content tall" id="out-combined"></div>
+          </div>
+        </div>
+        <button class="btn-chatgpt" onclick="openChatGPT()">
+          <span class="btn-chatgpt-icon">✨</span>
+          <div class="btn-chatgpt-text">
+            <span class="btn-chatgpt-main">Custom GPT で画像を生成する</span>
+            <span class="btn-chatgpt-sub">4 Pattern Banner Mixer を新しいウィンドウで開きます（左右分割推奨）</span>
+          </div>
+          <span class="btn-chatgpt-arrow">↗</span>
+        </button>
+        <button class="btn-copyall" onclick="copyAll()">📋 すべてのプロンプトをまとめてコピー</button>
+        <button class="btn-restart" onclick="restart()">🔄 最初からやり直す</button>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -404,13 +419,32 @@ function goForm(){
   sel.forEach(i=>{const t=T[i],url=iurl(t.f);const d=document.createElement('div');d.className='sel-thumb';
     d.innerHTML=`<img src="${url||''}" alt="${t.k}" onerror="this.style.display='none'" ${!url?'style="display:none"':''}><div class="sel-thumb-label">${t.k}</div>`;c.appendChild(d);});
   showScreen(2);
+  // Scroll right panel into view on mobile
+  const rp=document.getElementById('right-panel');
+  if(rp && window.innerWidth<900) rp.scrollIntoView({behavior:'smooth'});
 }
 function goBack(n){showScreen(n-1);}
 function showScreen(n){
-  document.querySelectorAll('.screen').forEach((s,i)=>s.classList.toggle('active',i+1===n));
-  ['dot1','dot2','dot3'].forEach((id,i)=>{const d=document.getElementById(id);d.className='step-dot';
-    if(i+1<n)d.classList.add('done');else if(i+1===n)d.classList.add('active');else d.classList.add('idle');});
-  window.scrollTo(0,0);
+  // Toggle right-panel screens
+  ['screen2','screen3'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el) el.classList.toggle('active', i+2===n);
+  });
+  // Show/hide empty state
+  const empty=document.getElementById('right-empty');
+  if(empty) empty.style.display=(n===1)?'flex':'none';
+  // Update step dots
+  ['dot1','dot2','dot3'].forEach((id,i)=>{
+    const d=document.getElementById(id);
+    if(!d) return;
+    d.className='step-dot';
+    if(i+1<n)d.classList.add('done');
+    else if(i+1===n)d.classList.add('active');
+    else d.classList.add('idle');
+  });
+  // Scroll right panel to top
+  const rp=document.getElementById('right-panel');
+  if(rp) rp.scrollTop=0;
 }
 function setCTA(v){fCTA=v;document.getElementById('cta-app').classList.toggle('active',v==='app');document.getElementById('cta-reg').classList.toggle('active',v==='reg');}
 
@@ -518,7 +552,13 @@ function copyAll(){
     setTimeout(()=>btn.textContent='📋 すべてのプロンプトをまとめてコピー',2000);
   });
 }
-function restart(){sel=[];fCTA='app';document.getElementById('f-shoku').value='';document.getElementById('f-copy').value='';setCTA('app');updateBar();renderGrid();showScreen(1);}
+function restart(){
+  sel=[];fCTA='app';
+  document.getElementById('f-shoku').value='';
+  document.getElementById('f-copy').value='';
+  setCTA('app');updateBar();renderGrid();
+  showScreen(1);
+}
 
 function openChatGPT(){
   const url='https://chatgpt.com/g/g-6a1ff20dbd0c819181d629f019e99f41-4-pattern-banner-mixer';

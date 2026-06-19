@@ -340,12 +340,66 @@ const SHOKUS=[...new Set(T.map(t=>t.s))];
 const CMAP={"緑青":"#41C2BE","赤":"#FF4F7E","オレンジ":"#F7B000","青":"#102B5B"};
 const VI={"実写":"📷","イラスト":"✏️","テキストのみ":"🔤","UI":"🖥"};
 const PAL={"緑青":"ティール：#41C2BE / ダークティール：#2BA8A4 / ピンク：#FF4F7E / ホワイト：#FFFFFF","赤":"レッド：#FF4F7E / ダークレッド：#CC2255 / ホワイト：#FFFFFF / ティール：#41C2BE","オレンジ":"オレンジ：#F7B000 / ダークオレンジ：#E07800 / ホワイト：#FFFFFF / ティール：#41C2BE","青":"ネイビー：#102B5B / ダークネイビー：#081A3D / ゴールド：#C5A15B / ホワイト：#FFFFFF"};
-const LAY={"実写":"1:1バナー。人物写真を主役に配置。テキストスペースを確保。下部にジョブメドレーロゴ＋CTA。","イラスト":"1:1バナー。フラット線画キャラクターを配置。中央に大型コピースペース。","テキストのみ":"1:1バナー。巨大なメインコピーを中央配置。背景はシンプルな幾何学模様。","UI":"1:1バナー。スマホUIモックアップを右側に配置。左にコピーとCTA。"};
-const VIS={"実写":"人物写真（笑顔・清潔感・職場環境）","イラスト":"フラット線画イラストキャラクター","テキストのみ":"タイポグラフィ中心","UI":"ジョブメドレーアプリUIモックアップ"};
-const STY={"実写":"写真＋シンプルテキストレイアウト / 医療・介護系プロフェッショナル","イラスト":"フラットベクターイラスト / 親しみやすいミニマルデザイン","テキストのみ":"タイポグラフィ主体 / 高コントラスト / 視認性重視","UI":"UIモックアップ＋コピーレイアウト / デジタルサービス訴求"};
 const MOO={"緑青":"清潔感・信頼感・爽やかさ","赤":"エネルギッシュ・緊迫感・行動促進","オレンジ":"温かみ・活気・親しみやすさ","青":"高級感・プレミアム・信頼性"};
-const MUS={"実写":"自然な笑顔 / 職場環境感 / 清潔感","イラスト":"線画タッチ / フラットデザイン / 親しみやすいキャラクター","テキストのみ":"巨大文字 / 高コントラスト / シンプルな構成","UI":"UI画面の視認性 / アプリらしいデザイン / ブランドカラー"};
-const AVO={"実写":"過度な演出 / 加工感 / 暗いトーン / メリットアイコン・箇条書き・特典リスト・3つのポイント等の追加情報を一切入れないこと / Text/copyに記載されていないテキストを追加しないこと","イラスト":"写真素材 / リアルな3D表現 / 過度な装飾 / メリットアイコン・箇条書き・特典リスト・3つのポイント等の追加情報を一切入れないこと / Text/copyに記載されていないテキストを追加しないこと","テキストのみ":"人物写真 / 複雑なイラスト / 装飾過多 / メリットアイコン・箇条書き・特典リスト・3つのポイント等の追加情報を一切入れないこと / Text/copyに記載されていないテキストを追加しないこと","UI":"写真人物 / 手書き風 / 複雑な背景 / メリットアイコン・箇条書き・特典リスト・3つのポイント等の追加情報を一切入れないこと / Text/copyに記載されていないテキストを追加しないこと"};
+const AVOID_BASE="メリットアイコン・箇条書き・特典リスト・3つのポイント等の追加情報を一切入れないこと / Text/copyに記載されていないテキストを追加しないこと";
+
+// ── RANDOMISATION POOLS ──────────────────────────────────────────────────
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+// Q1 実写: varied photo compositions
+const Q1_LAYOUTS=[
+  "人物写真を画面右半分に大きく配置。コピーを左上に縦積み。フッターにロゴ＋CTA。",
+  "人物写真を画面下2/3に配置。上部にコピーを横書きで大きく表示。フッターにロゴ＋CTA。",
+  "人物写真を左半分に配置。右側にコピーを縦積み。フッターにロゴ＋CTA。",
+  "人物写真を全面背景に薄くオーバーレイ。中央上部にコピーを白抜き大文字で表示。フッターにロゴ＋CTA。",
+  "人物写真を円形クロップで中央右に配置。左側と上部にコピー。フッターにロゴ＋CTA。",
+];
+const Q1_TONES=["暖色系・明るい自然光","明るく清潔感のある日中光","ソフトなスタジオライティング・白ベース","自然光・屋外シーン・明るい背景","コントラスト強め・清潔感重視"];
+const Q1_SUBJECTS=[
+  "笑顔で働く${shoku}の人物（正面気味・目線あり）",
+  "仕事中の${shoku}の人物（横顔・自然な動作）",
+  "同僚と会話中の${shoku}の人物（チームワーク感）",
+  "スマートフォンやタブレットを操作中の${shoku}の人物",
+  "職場環境を背景に立つ${shoku}の人物（全身または上半身）",
+];
+
+// Q2 イラスト: varied illustration styles
+const Q2_LAYOUTS=[
+  "イラストキャラクターを右下に配置。コピーを左上から中央に大きく展開。フッターにロゴ＋CTA。",
+  "イラストキャラクターを左下に配置。コピーを右上から中央に大きく展開。フッターにロゴ＋CTA。",
+  "イラストキャラクターを中央上部に大きく配置。コピーを下部に横書き。フッターにロゴ＋CTA。",
+  "複数のイラスト要素（人物＋職場アイコン）を散りばめた背景。コピーを中央に白ブロックで配置。フッターにロゴ＋CTA。",
+  "イラストキャラクターを右半分に配置。左半分はブランドカラーの無地背景にコピー。フッターにロゴ＋CTA。",
+];
+const Q2_STYLES=[
+  "フラットベクターイラスト / 親しみやすいミニマルデザイン",
+  "丸みのあるキャラクターデザイン / ソフトカラー",
+  "線画＋パステル塗り / 温かみのあるイラスト風",
+  "ジオメトリックフラット / モダンでスッキリしたデザイン",
+  "シンプル線画 / モノクロ＋ブランドカラーアクセント",
+];
+const Q2_TONES=["ブランドカラーベース・クリーンでフラット","パステルトーン・柔らかい印象","ホワイトベース・カラーアクセント","ブランドカラーグラデーション背景","明るいティールとホワイトの2トーン"];
+
+// Q3 テキストのみ: varied typography approaches
+const Q3_LAYOUTS=[
+  "巨大なメインコピーを画面中央に大胆配置。背景はブランドカラーの幾何学的グラフィック。フッターにロゴ＋CTA。",
+  "コピーを画面上部から下部へ縦長に大きく配置。背景は単色ブランドカラー。フッターにロゴ＋CTA。",
+  "コピーを2行に分けて超大型表示。1行目と2行目でサイズ差をつける。背景はグラデーション。フッターにロゴ＋CTA。",
+  "斜めのカラーブロックを背景に。コピーを白抜き大文字で中央配置。フッターにロゴ＋CTA。",
+  "コピーをコピー枠（ふきだし風またはボックス）で囲んで中央配置。背景はシンプル無地。フッターにロゴ＋CTA。",
+];
+const Q3_TONES=["高コントラスト・ビビッドなブランドカラー","ブランドカラー単色＋白テキスト","ダーク背景＋明るいテキスト","グラデーション背景・高視認性","白背景＋ブランドカラーテキスト・ミニマル"];
+
+// Q4 新しい表現: diverse experimental approaches
+const Q4_CONCEPTS=[
+  {layout:"スマホUIモックアップを画面右に配置。ジョブメドレーのアプリ画面を見せながら左にコピー。フッターにロゴ＋CTA。",style:"UIモックアップ＋コピーレイアウト / デジタルサービス訴求",tone:"クリーン・テック感・ホワイトベース"},
+  {layout:"写真とイラストを左右または上下でコラージュ。境界線をブランドカラーで区切る。フッターにロゴ＋CTA。",style:"フォトコラージュ / ハイブリッドビジュアル",tone:"クリエイティブ・バランス感・ブランドカラーアクセント"},
+  {layout:"大きな数字や記号（求人数・年収数値など）を画面いっぱいに背景として配置。前面にコピーと人物シルエット。フッターにロゴ＋CTA。",style:"データビジュアル＋タイポグラフィ / インパクト重視",tone:"モダン・インフォグラフィック風"},
+  {layout:"画面を格子状または斜め分割し、各セルに異なる要素（写真・アイコン・テキスト）を配置。フッターにロゴ＋CTA。",style:"グリッドレイアウト / 情報密度高め・シンプル寄り",tone:"スッキリ・整然・ブランドカラー使用"},
+  {layout:"人物のシルエットをブランドカラーで塗りつぶした抽象的なビジュアルを背景に。コピーをシャープに前面配置。フッターにロゴ＋CTA。",style:"シルエット＋タイポグラフィ / グラフィカルでシンプル",tone:"コントラスト高・アーティスティック寄り・シンプル"},
+  {layout:"職場を連想させる小道具やアイコン（聴診器・本・スマホ等）をフラット絵で散りばめた背景。中央にコピーをクリーンに配置。フッターにロゴ＋CTA。",style:"パターン背景＋コピー / 親しみやすい職種感",tone:"カラフル・軽やか・ブランドカラーベース"},
+];
 
 // Use lh3 CDN for Google Drive images (works when logged into Google)
 function iurl(f){const id=DRIVE_IDS[f];return id?`https://lh3.googleusercontent.com/d/${id}`:null}
@@ -441,7 +495,14 @@ function setCTA(v){fCTA=v;document.getElementById('cta-app').classList.toggle('a
 function makePrompt(t,shoku,copy,cta){
   const v=t?t.v:'実写',cl=t?t.c:'緑青';
   const refNote=t?`参照バナー：「${t.k}」(${t.s} / ${t.v})\n`:'';
-  return `${refNote}Layout:\n${LAY[v]||LAY['実写']}\n\nColors:\n${PAL[cl]||PAL['緑青']}\n\nVisual type:\n${shoku}の${VIS[v]}\n\nMain visual:\n${shoku}の${VIS[v]}\n\nText/copy:\n${shoku}\n${copy}\nジョブメドレー\n\nTarget:\n${shoku}への転職・求職者（登場人物・職場環境は必ず${shoku}に関連するものに限定）\n\nCTA:\n${cta}\n\nStyle:\n${STY[v]}\n\nMood:\n${MOO[cl]||MOO['緑青']}\n\nMust keep:\n${MUS[v]}\n\nAvoid:\n${AVO[v]}\n\nPriority:\n1. メインコピー「${copy}」の視認性\n2. ${shoku}ターゲットへの的確な訴求\n3. ジョブメドレーブランドとの一貫性`;
+  // Randomise layout and style per individual prompt too
+  const layouts={"実写":Q1_LAYOUTS,"イラスト":Q2_LAYOUTS,"テキストのみ":Q3_LAYOUTS,"UI":["スマホUIモックアップを右側に配置。左にコピーとCTA。フッターにロゴ＋CTA。","UIモックアップを中央上部に配置。下部にコピーとCTA。"]};
+  const styles={"実写":"写真＋シンプルテキストレイアウト / 医療・介護系プロフェッショナル","イラスト":pick(Q2_STYLES),"テキストのみ":"タイポグラフィ主体 / 高コントラスト / 視認性重視","UI":"UIモックアップ＋コピーレイアウト / デジタルサービス訴求"};
+  const vis={"実写":pick(Q1_SUBJECTS).replace('${shoku}',shoku),"イラスト":`${shoku}のフラット線画イラストキャラクター`,"テキストのみ":"タイポグラフィ中心","UI":"ジョブメドレーアプリUIモックアップ"};
+  const mus={"実写":"自然な笑顔 / 職場環境感 / 清潔感","イラスト":"線画タッチ / フラットデザイン / 親しみやすいキャラクター","テキストのみ":"巨大文字 / 高コントラスト / シンプルな構成","UI":"UI画面の視認性 / アプリらしいデザイン / ブランドカラー"};
+  const avo={"実写":`過度な演出 / 加工感 / 暗いトーン / ${AVOID_BASE}`,"イラスト":`写真素材 / リアルな3D表現 / 過度な装飾 / ${AVOID_BASE}`,"テキストのみ":`人物写真 / 複雑なイラスト / 装飾過多 / ${AVOID_BASE}`,"UI":`写真人物 / 手書き風 / 複雑な背景 / ${AVOID_BASE}`};
+  const lay=(layouts[v]||Q1_LAYOUTS);
+  return `${refNote}Layout:\n${pick(lay)}\n\nColors:\n${PAL[cl]||PAL['緑青']}\n\nVisual type:\n${vis[v]||vis['実写']}\n\nMain visual:\n${vis[v]||vis['実写']}\n\nText/copy:\n${shoku}\n${copy}\nジョブメドレー\n\nTarget:\n${shoku}への転職・求職者（登場人物・職場環境は必ず${shoku}に関連するものに限定）\n\nCTA:\n${cta}\n\nStyle:\n${styles[v]||styles['実写']}\n\nMood:\n${MOO[cl]||MOO['緑青']}\n\nMust keep:\n${mus[v]||mus['実写']}\n\nAvoid:\n${avo[v]||avo['実写']}\n\nPriority:\n1. メインコピー「${copy}」の視認性\n2. ${shoku}ターゲットへの的確な訴求\n3. ジョブメドレーブランドとの一貫性`;
 }
 
 function makeCombined(tA,tB,shoku,copy,cta){
@@ -449,7 +510,26 @@ function makeCombined(tA,tB,shoku,copy,cta){
   const refLine=refs.length?`参照バナー：${refs.map(t=>`「${t.k}」(${t.v})`).join('、')}\n`:'';
   const color=refs.length?refs[0].c:'緑青';
   const pal=PAL[color]||PAL['緑青'];
-  const avoid=`過度な演出 / 加工感 / 暗いトーン / メリットアイコン・箇条書き・特典リスト・3つのポイント等の追加情報を一切入れないこと / Text/copyに記載されていないテキストを追加しないこと`;
+  const avoid=`過度な演出 / 加工感 / 暗いトーン / ${AVOID_BASE}`;
+
+  // Pick random variants for each quadrant
+  const q1layout=pick(Q1_LAYOUTS);
+  const q1tone=pick(Q1_TONES);
+  const q1subject=pick(Q1_SUBJECTS).replace('${shoku}',shoku);
+
+  const q2layout=pick(Q2_LAYOUTS);
+  const q2style=pick(Q2_STYLES);
+  const q2tone=pick(Q2_TONES);
+
+  const q3layout=pick(Q3_LAYOUTS);
+  const q3tone=pick(Q3_TONES);
+
+  const q4=pick(Q4_CONCEPTS);
+
+  // Shuffle quadrant order occasionally for extra variation (50% chance)
+  const baseOrder=['Q1','Q2','Q3','Q4'];
+  // Keep Q types fixed but randomise some internal details above
+
   return `${refLine}以下の2つのバナープロンプトを組み合わせ、新しい統一されたデザイン方向性で1:1の正方形画像を生成してください。 画像は2x2の4分割コンセプトボード形式で生成してください。
 
 【重要：バリエーション指示】
@@ -462,33 +542,33 @@ Target: ${shoku}への転職・求職者（登場人物・職場環境は必ず$
 CTA（全象限フッターに配置）: ${cta}
 Avoid（全象限厳守）: ${avoid}
 
-【Q1 – 左上：実写ベース / ウォームトーン】
-Visual type: ${shoku}の人物写真（笑顔・清潔感・職場環境）を主役に配置
-Layout: 人物写真を画面右半分に大きく配置。コピーを左側に縦積み。フッターにロゴ＋CTA。
-Color tone: 暖色系・明るい自然光
+【Q1 – 左上：実写ベース】
+Visual type: ${q1subject}
+Layout: ${q1layout}
+Color tone: ${q1tone}
 Style: 写真＋シンプルテキストレイアウト / 医療・介護系プロフェッショナル
 Must keep: 自然な笑顔 / 職場環境感 / 清潔感
 
-【Q2 – 右上：イラストベース / クリーントーン】
-Visual type: ${shoku}のフラット線画イラストキャラクター
-Layout: イラストキャラクターを右下に配置。コピーを左上から中央に大きく展開。フッターにロゴ＋CTA。
-Color tone: ブランドカラーベース・クリーンでフラット
-Style: フラットベクターイラスト / 親しみやすいミニマルデザイン
-Must keep: 線画タッチ / フラットデザイン / 親しみやすいキャラクター
+【Q2 – 右上：イラストベース】
+Visual type: ${shoku}のイラストキャラクター
+Layout: ${q2layout}
+Color tone: ${q2tone}
+Style: ${q2style}
+Must keep: フラットデザイン / 親しみやすいキャラクター / イラストタッチ
 
-【Q3 – 左下：テキストのみ / ボールドトーン】
+【Q3 – 左下：テキストのみ】
 Visual type: テキストとブランドカラーのみ（人物・イラスト一切不使用）
-Layout: 巨大なメインコピーを画面中央に大胆配置。背景はブランドカラーの幾何学的グラフィック。フッターにロゴ＋CTA。
-Color tone: 高コントラスト・ビビッドなブランドカラー
+Layout: ${q3layout}
+Color tone: ${q3tone}
 Style: タイポグラフィ主体 / 高コントラスト / 視認性重視
 Must keep: 巨大文字 / シンプルな構成 / 人物・イラスト不使用
 
-【Q4 – 右下：新しい表現 / シンプル寄り】
-Visual type: 上記3つとは異なる新しいビジュアル表現（UIモックアップ・コラージュ・グラフィックパターン等）
-Layout: Q1〜Q3とは明確に異なる構図で構成。ただしシンプルさを保ち、下部にジョブメドレーロゴ＋CTAを配置。
-Color tone: 上記3案と差別化されたカラートーン
-Style: 実験的だが過剰にならない / ブランドの清潔感を維持 / 実制作に近い完成度
-Must keep: ブランドカラー / コピーの視認性 / ジョブメドレーロゴ
+【Q4 – 右下：新しい表現（シンプル寄り）】
+Visual type: 上記3つとは異なる新しいビジュアル表現
+Layout: ${q4.layout}
+Color tone: ${q4.tone}
+Style: ${q4.style}
+Must keep: ブランドカラー / コピーの視認性 / シンプルな構成
 
 Mood（全象限共通）: ${MOO[color]||MOO['緑青']}
 Priority（全象限共通）:
@@ -496,6 +576,7 @@ Priority（全象限共通）:
 2. ${shoku}ターゲットへの的確な訴求
 3. ジョブメドレーブランドとの一貫性`;
 }
+
 
 function highlight(text,keyClass='pk'){
   return text.replace(/^(Layout:|Colors:|Visual type:|Main visual:|Text\/copy:|Target:|CTA:|Style:|Mood:|Must keep:|Avoid:|Priority:|Output format:|Unified concept:|Design directions per quadrant:|Shared design rules.*:|Q[1-4] specifics.*:|参照バナー[：A-Z ]*)/gm,`<span class="${keyClass}">$1</span>`);
